@@ -73,4 +73,13 @@ code {
   height: 1px;
 }
 
+.wallet-adapter-button {
+  font-weight: 600;
+  background: #96e500;
+  color: #ffffff;
+  border-radius: 10px;
+}
 
+.wallet-adapter-modal {
+  z-index: 9999 !important;
+}

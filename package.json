@@ -63,8 +63,5 @@
   "devDependencies": {
     "@types/styled-components": "^5.1.25",
     "sass": "^1.54.3"
-  },
-  "browser": {
-    "crypto": false
   }
 }

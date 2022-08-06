@@ -1,12 +1,23 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Particles from "react-particles";
 import { loadFull } from "tsparticles";
 import { Container, Engine } from 'tsparticles-engine';
 import H1 from 'components/atoms/H1';
 import Button from 'components/atoms/Button';
-import { Wallet } from 'components/organisms/Wallet';
+import { useWallet } from '@solana/wallet-adapter-react';
+import { useWalletModal } from '@solana/wallet-adapter-react-ui';
+import { useNavigate } from 'react-router-dom';
 
 const Landing = () => {
+    const { connected } = useWallet();
+    const { setVisible } = useWalletModal();
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (connected) {
+            navigate("/welcome");
+        }
+    }, [connected])
+
     const particlesInit = useCallback(async (engine: Engine) => {
         console.log(engine);
 
@@ -20,9 +31,6 @@ const Landing = () => {
         await console.log(container);
     }, []);
 
-    const handleConnect = () => {
-
-    }
 
     return (
         <div className='' id="tsparticles">
@@ -113,14 +121,14 @@ const Landing = () => {
                     <div className='d-flex flex-column h-100 align-items-center justify-content-center pb-5'>
 
                         <H1 className='fw-bold fs-1'>ENTROPY</H1>
-                        <Button onClick={handleConnect} className='mt-3'>
+                        <Button className='mt-3' onClick={() => setVisible(true)}>
                             <div className='fs-6'>Connect</div>
                         </Button>
                     </div>
                 </div>
             </div>
-            <Wallet />
-        </div>
+
+        </div >
     )
 }
 
